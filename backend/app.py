@@ -1,59 +1,59 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
-import os
-import json
-from parser.parse_pdf_to_tasks import parse_task_from_pdf
-from generate_docs.generate_word import generate_word
-from generate_docs.generate_excel import generate_excel
-from generate_docs.generate_pdf import generate_pdf
-from generate_docs.generate_ppt import generate_ppt
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Enable CORS for all routes (frontend can access backend)
 
-LOG_FILE = "backend/logs/packet_log.json"
-STP_DIR = "backend/static/STPs/"
+# ------------------------------------
+# ✅ Root route (just confirms backend is running)
+@app.route("/")
+def index():
+    return "✅ Flask backend is running!"
 
-@app.route("/api/task", methods=["GET"])
+# ------------------------------------
+# ✅ GET route to fetch task info
+@app.route("/api/task")
 def get_task():
-    task_code = request.args.get("code")
-    if not task_code:
-        return jsonify({"error": "Missing task code"}), 400
-    task_data = parse_task_from_pdf(STP_DIR, task_code)
-    return jsonify(task_data)
+    code = request.args.get("code")
 
-@app.route("/api/generate", methods=["POST"])
-def generate_packet():
-    data = request.json
-    task = data.get("task")
-    if not task:
-        return jsonify({"error": "No task data provided"}), 400
-
-    word_path = generate_word(task)
-    excel_path = generate_excel(task)
-    pdf_path = generate_pdf(task)
-    ppt_path = generate_ppt(task)
-
-    log_entry = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "task_id": task.get("task_id"),
-        "files": [word_path, excel_path, pdf_path, ppt_path]
+    # Simulated task data — eventually will pull from STP JSON
+    task_data = {
+        "code": code,
+        "title": "Simulated Task Title",
+        "condition": "Given necessary equipment and a training environment...",
+        "standard": "Complete task IAW Army standards with zero critical errors.",
+        "steps": [
+            "Step 1: Do something",
+            "Step 2: Do something else",
+        ]
     }
 
-    with open(LOG_FILE, "r+") as f:
-        logs = json.load(f)
-        logs.append(log_entry)
-        f.seek(0)
-        json.dump(logs, f, indent=2)
+    return jsonify(task_data)
 
-    return jsonify({"status": "Packet generated", "log": log_entry})
+# ------------------------------------
+# ✅ POST route to simulate packet generation
+@app.route("/api/generate", methods=["POST"])
+def generate_packet():
+    try:
+        data = request.json
+        task = data.get("task", {})
+        task_code = task.get("code", "UNKNOWN")
+        training_time = datetime.utcnow().isoformat()
 
-@app.route("/api/logs", methods=["GET"])
-def get_logs():
-    with open(LOG_FILE) as f:
-        return jsonify(json.load(f))
+        print(f"[{training_time}] Packet generation requested for task {task_code}")
 
+        # Simulated response — later will return actual file/zip
+        return jsonify({
+            "status": "success",
+            "message": f"Packet generated for task {task_code}",
+            "timestamp": training_time
+        })
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+# ------------------------------------
+# ✅ Run Flask development server
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,14 @@
+[
+  {
+    "code": "081-000-0016",
+    "title": "Treat Heat Injury",
+    "condition": "Given a simulated casualty in a hot environment...",
+    "standard": "Identify and treat signs of heat exhaustion or heat stroke."
+  },
+  {
+    "code": "081-000-0017",
+    "title": "Treat Cold Injury",
+    "condition": "Given a casualty exposed to cold temperatures...",
+    "standard": "Recognize cold injury types and administer proper treatment."
+  }
+]

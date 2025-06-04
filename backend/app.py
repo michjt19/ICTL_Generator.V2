@@ -11,25 +11,29 @@ CORS(app)  # Enable CORS for all routes (frontend can access backend)
 def index():
     return "✅ Flask backend is running!"
 
+import json
+import os
+
 # ------------------------------------
-# ✅ GET route to fetch task info
+# ✅ GET route to fetch real task info from JSON
 @app.route("/api/task")
 def get_task():
     code = request.args.get("code")
+    filepath = os.path.join(os.path.dirname(__file__), "data", "tasks.json")
 
-    # Simulated task data — eventually will pull from STP JSON
-    task_data = {
-        "code": code,
-        "title": "Simulated Task Title",
-        "condition": "Given necessary equipment and a training environment...",
-        "standard": "Complete task IAW Army standards with zero critical errors.",
-        "steps": [
-            "Step 1: Do something",
-            "Step 2: Do something else",
-        ]
-    }
+    try:
+        with open(filepath, "r") as f:
+            tasks = json.load(f)
 
-    return jsonify(task_data)
+        for task in tasks:
+            if task["code"] == code:
+                return jsonify(task)
+
+        return jsonify({"error": "Task not found"}), 404
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 # ------------------------------------
 # ✅ POST route to simulate packet generation

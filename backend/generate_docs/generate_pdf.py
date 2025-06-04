@@ -1,19 +1,22 @@
+from fpdf import FPDF
 
-from reportlab.lib.pagesizes import LETTER
-from reportlab.pdfgen import canvas
-from pathlib import Path
+def generate_pdf(task, filepath):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", "B", 16)
+    pdf.cell(0, 10, task["title"], ln=True)
 
-def generate_pdf(task):
-    path = Path(f"backend/static/{task['task_id']}_packet.pdf")
-    c = canvas.Canvas(str(path), pagesize=LETTER)
-    c.setFont("Helvetica", 12)
-    c.drawString(100, 750, f"Training Packet for {task['task_id']}")
-    y = 730
-    for line in task["content"].split("\n"):
-        if y < 50:
-            c.showPage()
-            y = 750
-        c.drawString(50, y, line.strip())
-        y -= 20
-    c.save()
-    return str(path)
+    pdf.set_font("Arial", size=12)
+    pdf.cell(0, 10, f"Task Code: {task['code']}", ln=True)
+    pdf.multi_cell(0, 10, f"Condition: {task['condition']}")
+    pdf.multi_cell(0, 10, f"Standard: {task['standard']}")
+
+    if "steps" in task:
+        pdf.set_font("Arial", "B", 14)
+        pdf.cell(0, 10, "Performance Steps", ln=True)
+
+        pdf.set_font("Arial", size=12)
+        for i, step in enumerate(task["steps"], 1):
+            pdf.multi_cell(0, 10, f"{i}. {step}")
+
+    pdf.output(filepath)

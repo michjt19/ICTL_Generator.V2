@@ -1,34 +1,64 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function TaskViewer() {
-  const [code, setCode] = useState("");
-  const [task, setTask] = useState(null);
-  const [error, setError] = useState("");
+const API_BASE = "https://solid-capybara-6p74q67w5wj2g6x-5000.app.github.dev";
 
-  const fetchTask = async () => {
-    try {
-      const res = await axios.get(`/api/task?code=${code}`);
-      setTask(res.data);
-      setError("");
-    } catch (err) {
-      setError("Task not found.");
-      setTask(null);
-    }
-  };
+export default function TaskViewer() {
+  const [tasks, setTasks] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    const fetchAllTasks = async () => {
+      try {
+        const res = await axios.get(`${API_BASE}/api/tasks`);
+        setTasks(res.data);
+      } catch (err) {
+        console.error("Failed to load tasks:", err);
+      }
+    };
+
+    fetchAllTasks();
+  }, []);
+
+  const filtered = tasks.filter(
+    (task) =>
+      task.code.toLowerCase().includes(search.toLowerCase()) ||
+      task.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div>
-      <h2>Search for a Task</h2>
-      <input type="text" value={code} onChange={(e) => setCode(e.target.value)} placeholder="e.g., 081-000-0016" />
-      <button onClick={fetchTask}>Search</button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {task && (
-        <div>
-          <h3>{task.task_id}</h3>
-          <pre>{task.content}</pre>
-        </div>
+    <div style={{ padding: "2rem" }}>
+      <h2>📚 Task Viewer</h2>
+
+      <input
+        type="text"
+        placeholder="Search by task code or title"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ width: "300px", padding: "0.5rem", marginBottom: "1rem" }}
+      />
+
+      {filtered.length === 0 ? (
+        <p>No tasks found.</p>
+      ) : (
+        <ul style={{ listStyle: "none", padding: 0 }}>
+          {filtered.map((task) => (
+            <li
+              key={task.code}
+              style={{
+                border: "1px solid #ccc",
+                borderRadius: "8px",
+                marginBottom: "1rem",
+                padding: "1rem",
+                background: "#f9f9f9"
+              }}
+            >
+              <h3>{task.code} — {task.title}</h3>
+              <p><strong>Condition:</strong> {task.condition}</p>
+              <p><strong>Standard:</strong> {task.standard}</p>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

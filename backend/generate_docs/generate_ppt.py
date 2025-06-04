@@ -1,14 +1,24 @@
-
 from pptx import Presentation
-from pathlib import Path
 
-def generate_ppt(task):
+def generate_ppt(task, filepath):
     prs = Presentation()
-    slide = prs.slides.add_slide(prs.slide_layouts[1])
-    title = slide.shapes.title
+    title_slide_layout = prs.slide_layouts[0]
+    bullet_slide_layout = prs.slide_layouts[1]
+
+    slide = prs.slides.add_slide(title_slide_layout)
+    slide.shapes.title.text = task["title"]
+    slide.placeholders[1].text = f"Task Code: {task['code']}"
+
+    slide = prs.slides.add_slide(bullet_slide_layout)
+    slide.shapes.title.text = "Condition & Standard"
     content = slide.placeholders[1]
-    title.text = f"Task {task['task_id']}"
-    content.text = task["content"]
-    path = Path(f"backend/static/{task['task_id']}_packet.pptx")
-    prs.save(path)
-    return str(path)
+    content.text = f"Condition: {task['condition']}\nStandard: {task['standard']}"
+
+    if "steps" in task:
+        slide = prs.slides.add_slide(bullet_slide_layout)
+        slide.shapes.title.text = "Performance Steps"
+        body = slide.placeholders[1]
+        for step in task["steps"]:
+            body.text += f"\n• {step}"
+
+    prs.save(filepath)

@@ -8,9 +8,9 @@
   },
   "postCreateCommand": "pip install -r backend/requirements.txt && npm --prefix frontend install",
   "postStartCommand": "./.devcontainer/start.sh",
-  "forwardPorts": [3000, 5000],
+  "forwardPorts": [5173, 5000],
   "portsAttributes": {
-    "3000": {"label": "Frontend", "onAutoForward": "openBrowser", "visibility": "public"},
+    "5173": {"label": "Frontend", "onAutoForward": "openBrowser", "visibility": "public"},
     "5000": {"label": "Backend", "visibility": "public"}
   }
 }

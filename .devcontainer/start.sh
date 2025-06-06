@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-# Start backend
-(cd backend && nohup python3 app.py >/workspace/backend.log 2>&1 &)
+# Create log directory if it doesn't exist
+mkdir -p /workspace
 
-# Start frontend
-(cd frontend && nohup npm run dev >/workspace/frontend.log 2>&1 &)
+echo "🚀 Starting backend (Flask)..."
+(cd backend && nohup python3 app.py >> /workspace/backend.log 2>&1 &)
+
+echo "🚀 Starting frontend (React)..."
+(cd frontend && nohup npm run dev >> /workspace/frontend.log 2>&1 &)
+
+echo "✅ Both servers started! Logs in /workspace/"

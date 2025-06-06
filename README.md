@@ -1,6 +1,7 @@
+
 # ICTL Training Generator
 
-The ICTL Training Generator is a full-stack web application designed to generate training packets for any Individual Critical Task List (ICTL) task across the 68 Career Management Field (CMF). It enables Soldiers, NCOs, and trainers to search for tasks, extract training standards, and export mission-ready documents for sustainment and evaluation.
+The ICTL Training Generator is a full-stack web application designed for generating training packets for any Individual Critical Task List (ICTL) task across the 68 Career Management Field (CMF). It enables Soldiers, NCOs, and trainers to search for tasks, extract training standards, and export mission-ready documents for sustainment and evaluation.
 
 ---
 
@@ -10,97 +11,103 @@ The ICTL Training Generator is a full-stack web application designed to generate
 - 📄 Generate Word, Excel, PDF, and PowerPoint packets
 - 🧠 Built-in parser for per-task extraction from official STPs
 - 📁 Log export history with timestamps and file details
-- 🌓 Dark mode toggle and rotating quotes on the homepage
-- 🚀 React frontend with Flask backend (fully GitHub Codespaces compatible)
+- 🌓 Dark mode toggle and rotating quotes on homepage
+- 🚀 React frontend with Flask backend (GitHub Codespaces compatible)
 
 ---
 
 ## 📦 Project Structure
 
+```
 📁 backend/
-├── app.py # Flask API
-├── parser/ # Task parser
-├── generate_docs/ # Packet generators
-├── static/STPs/ # Upload official STPs here
-└── logs/packet_log.json # Version tracking
+  ├── app.py                 # Flask API
+  ├── parser/                # Task parser
+  ├── generate_docs/         # Packet generators
+  ├── static/STPs/           # Upload STPs here
+  └── logs/packet_log.json   # Version tracking
 
 📁 frontend/
-├── public/ # HTML template
-├── src/pages/ # Home, TaskViewer, Generator, Help
-├── src/components/ # Sidebar layout
-└── vite.config.js # React-to-Flask proxy
+  ├── public/                # HTML template
+  ├── src/pages/             # Home, TaskViewer, Generator, Help
+  ├── src/components/        # Sidebar layout
+  └── vite.config.js         # React-to-Flask proxy
 
- 📁 data/tasks/               # Parsed .json storage (future use)
- 
- ---
- 
- ## 🚀 How to Launch in GitHub Codespaces
- 
- 1. Create a new GitHub repo and upload all files.
- 2. Click **“Code” > “Open with Codespaces”**.
- 3. In Codespaces Terminal:
- 
- **Backend**
+📁 data/tasks/               # Parsed .json storage (future use)
+```
+
+---
+
+## 🚀 How to Launch in GitHub Codespaces
+
+1. Create a new GitHub repo and upload all files.
+2. Click **“Code” > “Open with Codespaces”**.
+3. In Codespaces Terminal:
+
 ```bash
- pip install -r backend/requirements.txt
- python backend/app.py
- ```
- 
- **Frontend (new terminal)**
- ```bash
- cd frontend
- npm install
- npm run dev
- ```
- 
+# Backend
+pip install -r backend/requirements.txt
+python backend/app.py
+```
+
+```bash
+# Frontend (new terminal)
+cd frontend
+npm install
+npm run dev
+```
+
 4. Make ports 5173 (frontend) and 5000 (backend) public.
 
-5. If you're using GitHub Codespaces, the included `.devcontainer` configuration
-automatically installs dependencies, starts both servers, forwards these ports,
-and opens them in the browser as soon as the servers are running. The
-`start.sh` script exports `VITE_API_BASE=http://localhost:5000` before starting
-the frontend so requests hit your local backend. If `start.sh` isn't executable,
-run `chmod +x .devcontainer/start.sh`.
- 
- ---
- 
- ## 🌐 Deploy to GitHub Pages
- 
- To deploy the frontend only:
- 1. Add to `frontend/package.json`:
- 
- ```json
- "homepage": "https://YOUR_USERNAME.github.io/ICTL-Training-Generator"
- ```
- 
- 2. Add deploy scripts:
- 
- ```json
- "scripts": {
-   "predeploy": "npm run build",
-   "deploy": "gh-pages -d dist"
- }
- ```
- 
- 3. Deploy:
- 
- ```bash
- npm install gh-pages --save-dev
- npm run deploy
- ```
+If you're using GitHub Codespaces, the included `.devcontainer` configuration
+automatically installs dependencies, starts both servers, and forwards these
+ports for you. The `start.sh` script should be executable; if it's not, run
+`chmod +x .devcontainer/start.sh`.
 
-# 📎 Notes
-- STP parsing is done locally — upload official STPs to backend/static/STPs/.
 
-- Training packet generation activity is logged in logs/packet_log.json.
+---
 
+## 🌐 Deploy to GitHub Pages
+
+To deploy the frontend only:
+1. Add to `frontend/package.json`:
+
+```json
+"homepage": "https://YOUR_USERNAME.github.io/ICTL-Training-Generator"
+```
+
+2. Add deploy scripts:
+
+```json
+"scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+}
+```
+
+3. Deploy:
+
+```bash
+npm install gh-pages --save-dev
+npm run deploy
+```
+
+---
+
+## 📎 Notes
+
+- Backend STP parsing is offline/local — place official STPs inside `backend/static/STPs/`
+- Task generation is logged in `logs/packet_log.json`
 - This project is public and open to contributions.
 
-# 📄 License
+---
 
-- MIT License. Created to support mission optimization, training readiness, and automation within the U.S. Army Medical field.
+## 📄 License
 
-# 🤝 Maintainer
+MIT License. Created for mission optimization, training readiness, and automation support within the U.S. Army Medical field.
 
-- Developed with the assistance of AI to support Soldier readiness and streamline training operations.
+---
+
+## 🤝 Maintainer
+
+Developed with the assistance of AI to support Soldier readiness and streamline training operations.
 

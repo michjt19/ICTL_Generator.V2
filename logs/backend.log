@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspaces/ICTL_Generator.V2/backend/app.py", line 10, in <module>
+    from generate_docs.generate_pdf import generate_pdf
+  File "/workspaces/ICTL_Generator.V2/backend/generate_docs/generate_pdf.py", line 1, in <module>
+    from fpdf import FPDF
+ModuleNotFoundError: No module named 'fpdf'

@@ -8,7 +8,7 @@ echo "[start.sh] Installing frontend dependencies..." | tee -a logs/init.log
 
 echo "[start.sh] Starting frontend..." | tee -a logs/init.log
 export VITE_API_BASE="http://localhost:5000"
-(cd frontend && nohup npm run dev -- --host --open=false >> ../logs/frontend.log 2>&1 &)
+(cd frontend && nohup npm run dev >> ../logs/frontend.log 2>&1 &)
 
 sleep 8
 

@@ -1,14 +1,19 @@
-# Ignore logs
+# Logs
 logs/
 *.log
 
-# Ignore Python artifacts
+# Python artifacts
 __pycache__/
 *.pyc
+*.py[cod]
 
-# Ignore Node.js artifacts
+# Node.js artifacts
 node_modules/
+frontend/node_modules/
 dist/
 
 # VS Code settings
 .vscode/
+
+# macOS system files
+.DS_Store

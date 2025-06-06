@@ -60,7 +60,9 @@ npm run dev
 
 If you're using GitHub Codespaces, the included `.devcontainer` configuration
 automatically installs dependencies, starts both servers, and forwards these
-ports for you.
+ports for you. The `start.sh` script should be executable; if it's not, run
+`chmod +x .devcontainer/start.sh`.
+
 
 ---
 

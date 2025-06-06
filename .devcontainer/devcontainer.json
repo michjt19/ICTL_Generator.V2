@@ -10,7 +10,15 @@
   "postStartCommand": "./.devcontainer/start.sh",
   "forwardPorts": [5173, 5000],
   "portsAttributes": {
-    "5173": {"label": "Frontend", "onAutoForward": "openBrowser", "visibility": "public"},
-    "5000": {"label": "Backend", "visibility": "public"}
+    "5173": {
+      "label": "Frontend",
+      "onAutoForward": "openBrowser",
+      "visibility": "public"
+    },
+    "5000": {
+      "label": "Backend",
+      "onAutoForward": "openBrowser",
+      "visibility": "public"
+    }
   }
 }

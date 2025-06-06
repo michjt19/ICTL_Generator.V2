@@ -30,86 +30,77 @@ The ICTL Training Generator is a full-stack web application designed to generate
 ├── src/components/ # Sidebar layout
 └── vite.config.js # React-to-Flask proxy
 
-📁 data/tasks/ # Parsed .json storage (future use)
+ 📁 data/tasks/               # Parsed .json storage (future use)
+ 
+ ---
+ 
+ ## 🚀 How to Launch in GitHub Codespaces
+ 
+ 1. Create a new GitHub repo and upload all files.
+ 2. Click **“Code” > “Open with Codespaces”**.
+ 3. In Codespaces Terminal:
+ 
+ **Backend**
+```bash
+ pip install -r backend/requirements.txt
+ python backend/app.py
+ ```
+ 
+ **Frontend (new terminal)**
+ ```bash
+ cd frontend
+ npm install
+ npm run dev
+ ```
+ 
+4. Make ports 5173 (frontend) and 5000 (backend) public.
 
----
+5. If you're using GitHub Codespaces, the included `.devcontainer` configuration
+automatically installs dependencies, starts both servers, forwards these ports,
+and opens them in the browser as soon as the servers are running. The
+`start.sh` script exports `VITE_API_BASE=http://localhost:5000` before starting
+the frontend so requests hit your local backend. If `start.sh` isn't executable,
+run `chmod +x .devcontainer/start.sh`.
+ 
+ ---
+ 
+ ## 🌐 Deploy to GitHub Pages
+ 
+ To deploy the frontend only:
+ 1. Add to `frontend/package.json`:
+ 
+ ```json
+ "homepage": "https://YOUR_USERNAME.github.io/ICTL-Training-Generator"
+ ```
+ 
+ 2. Add deploy scripts:
+ 
+ ```json
+ "scripts": {
+   "predeploy": "npm run build",
+   "deploy": "gh-pages -d dist"
+ }
+ ```
+ 
+ 3. Deploy:
+ 
+ ```bash
+ npm install gh-pages --save-dev
+ npm run deploy
+ ```
 
-## 🚀 Launch in GitHub Codespaces
-
-1. Create a new GitHub repository and upload all files.
-2. Click **“Code” → “Open with Codespaces”**.
-3. In the Codespaces terminal, run:
-
-### Backend
-pip install -r backend/requirements.txt
-
-python backend/app.py
-
-### Frontend (in a new terminal)
-cd frontend
-
-npm install
-
-npm run dev
-
-
-**Open the "Ports" tab and make port 5173 (frontend) and port 5000 (backend) public.**
-
-**If you're using GitHub Codespaces, the included .devcontainer configuration will automatically:**
- - Install dependencies
- - Start both servers
- - Forward the necessary ports
- - Open them in the browser
-
-**The start.sh script sets VITE_API_BASE=http://localhost:5000 before starting the frontend so requests hit your local backend. If the script isn't executable, run:**
-
-chmod +x .devcontainer/start.sh
-
-
-## 🌐 Deploy to GitHub Pages (Frontend Only)
-
-- **In frontend/package.json, add:**
-
-"homepage": "https://YOUR_USERNAME.github.io/ICTL-Training-Generator"
-
-
-- **Add deploy scripts:**
-  
-"scripts": {
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-}
-
-
-- **Deploy with:**
-
-npm install gh-pages --save-dev
-
-npm run deploy
-
-
-## 📎 Notes
+# 📎 Notes
 - STP parsing is done locally — upload official STPs to backend/static/STPs/.
 
 - Training packet generation activity is logged in logs/packet_log.json.
 
 - This project is public and open to contributions.
 
-## 📄 License
+# 📄 License
+
 - MIT License. Created to support mission optimization, training readiness, and automation within the U.S. Army Medical field.
 
-## 🤝 Maintainer
+# 🤝 Maintainer
+
 - Developed with the assistance of AI to support Soldier readiness and streamline training operations.
-
----
-
-Let me know if you'd like:
-- A `CONTRIBUTING.md` file for collaborators
-- A badge section (`build`, `version`, `license`, etc.)
-- Screenshots or a walkthrough GIF for the homepage!
-
-
-
-
-
 

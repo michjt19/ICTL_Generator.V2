@@ -1,9 +1,8 @@
-
 import React from "react";
 
 export default function Help() {
   return (
-    <div>
+    <div className="help">
       <h2>Help & Instructions</h2>
       <ul>
         <li>Use "View" to look up ICTL task content from STP PDFs.</li>

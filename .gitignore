@@ -1,0 +1,14 @@
+# Ignore logs
+logs/
+*.log
+
+# Ignore Python artifacts
+__pycache__/
+*.pyc
+
+# Ignore Node.js artifacts
+node_modules/
+dist/
+
+# VS Code settings
+.vscode/

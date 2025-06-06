@@ -3,10 +3,10 @@ set -e
 
 mkdir -p logs
 
-echo "[start.sh] Starting frontend first..." | tee -a logs/init.log
+echo "[start.sh] Starting frontend..." | tee -a logs/init.log
 (cd frontend && nohup npm run dev >> ../logs/frontend.log 2>&1 &)
 
-# Give Vite time to bind to port 5173 before Codespaces scans ports
+# Wait for Vite to bind to port 5173
 sleep 8
 
 echo "[start.sh] Starting backend..." | tee -a logs/init.log

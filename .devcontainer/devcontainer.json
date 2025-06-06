@@ -1,15 +1,6 @@
 {
   "name": "ICTL Generator",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    }
-  },
-  "onCreateCommand": "sleep 5",
-  "postCreateCommand": "pip install -r backend/requirements.txt && npm --prefix frontend install",
-  "postStartCommand": "./.devcontainer/start.sh",
-  "forwardPorts": [5173, 5000],
+  "postCreateCommand": "chmod +x .devcontainer/start.sh && .devcontainer/start.sh",
   "portsAttributes": {
     "5173": {
       "label": "Frontend",
@@ -20,6 +11,13 @@
       "label": "Backend",
       "onAutoForward": "openBrowser",
       "visibility": "public"
+    }
+  },
+  "forwardPorts": [5000, 5173],
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": []
     }
   }
 }

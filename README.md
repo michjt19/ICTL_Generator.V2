@@ -11,7 +11,7 @@ The ICTL Training Generator is a full-stack web application designed for generat
 - 📄 Generate Word, Excel, PDF, and PowerPoint packets
 - 🧠 Built-in parser for per-task extraction from official STPs
 - 📁 Log export history with timestamps and file details
-- 🌓 Dark mode toggle and rotating quotes on homepage
+- 🌓 Dark mode toggle and modern responsive design
 - 🚀 React frontend with Flask backend (GitHub Codespaces compatible)
 
 ---
@@ -59,10 +59,11 @@ npm run dev
 4. Make ports 5173 (frontend) and 5000 (backend) public.
 
 If you're using GitHub Codespaces, the included `.devcontainer` configuration
-automatically installs dependencies, starts both servers, and forwards these
-ports for you. The `start.sh` script should be executable; if it's not, run
-`chmod +x .devcontainer/start.sh`.
-
+automatically installs dependencies, starts both servers, forwards these ports,
+and opens them in the browser as soon as the servers are running. The
+`start.sh` script exports `VITE_API_BASE=http://localhost:5000` before starting
+the frontend so requests hit your local backend. If `start.sh` isn't executable,
+run `chmod +x .devcontainer/start.sh`.
 
 ---
 

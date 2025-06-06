@@ -28,32 +28,23 @@ export default function TaskViewer() {
   );
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="task-viewer">
       <h2>📚 Task Viewer</h2>
 
       <input
+        className="search-input"
         type="text"
         placeholder="Search by task code or title"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        style={{ width: "300px", padding: "0.5rem", marginBottom: "1rem" }}
       />
 
       {filtered.length === 0 ? (
         <p>No tasks found.</p>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <ul className="task-list">
           {filtered.map((task) => (
-            <li
-              key={task.code}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "8px",
-                marginBottom: "1rem",
-                padding: "1rem",
-                background: "#f9f9f9"
-              }}
-            >
+            <li key={task.code} className="task-card">
               <h3>{task.code} — {task.title}</h3>
               <p><strong>Condition:</strong> {task.condition}</p>
               <p><strong>Standard:</strong> {task.standard}</p>

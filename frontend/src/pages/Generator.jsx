@@ -27,25 +27,25 @@ export default function Generator() {
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "800px" }}>
+    <div className="generator">
       <h2>🎯 Generate Training Packet</h2>
 
       <input
+        className="task-input"
         type="text"
         value={code}
         onChange={(e) => setCode(e.target.value)}
         placeholder="Enter Task Code (e.g. 081-000-0016)"
-        style={{ padding: "0.5rem", marginRight: "1rem", width: "250px" }}
       />
 
-      <button onClick={handleGenerate} style={{ padding: "0.5rem 1rem" }}>
+      <button className="primary-btn" onClick={handleGenerate}>
         Generate
       </button>
 
-      <p style={{ marginTop: "1rem" }}>{status}</p>
+      <p>{status}</p>
 
       {task && (
-        <div style={{ marginTop: "2rem", background: "#f4f4f4", padding: "1rem", borderRadius: "8px" }}>
+        <div className="task-card" style={{ marginTop: "2rem" }}>
           <h3>{task.title}</h3>
           <p><strong>Condition:</strong> {task.condition}</p>
           <p><strong>Standard:</strong> {task.standard}</p>

@@ -1,6 +1,6 @@
 {
   "name": "ICTL Generator",
-  "postCreateCommand": "chmod +x .devcontainer/start.sh && .devcontainer/start.sh",
+  "postCreateCommand": "pip install -r backend/requirements.txt && chmod +x .devcontainer/start.sh && .devcontainer/start.sh",
   "portsAttributes": {
     "5173": {
       "label": "Frontend",

@@ -6,7 +6,7 @@
       "version": "18"
     }
   },
-  "onCreateCommand": "sleep 5",,
+  "onCreateCommand": "sleep 5",
   "postCreateCommand": "pip install -r backend/requirements.txt && npm --prefix frontend install",
   "postStartCommand": "./.devcontainer/start.sh",
   "forwardPorts": [5173, 5000],

@@ -6,4 +6,3 @@ set -e
 
 # Start frontend
 (cd frontend && nohup npm run dev >/workspace/frontend.log 2>&1 &)
-

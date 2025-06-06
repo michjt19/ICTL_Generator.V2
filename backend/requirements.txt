@@ -6,3 +6,4 @@ reportlab
 python-pptx
 PyPDF2
 fpdf
+fpdf

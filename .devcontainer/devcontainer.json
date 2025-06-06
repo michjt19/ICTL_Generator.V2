@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
+      "version": "20"
     }
   },
   "postCreateCommand": "pip install -r backend/requirements.txt && npm --prefix frontend install && chmod +x .devcontainer/start.sh",

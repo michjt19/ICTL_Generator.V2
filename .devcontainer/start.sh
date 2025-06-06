@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p logs
+cd "$(dirname "$0")/.."   # Ensure script runs from project root
+mkdir -p logs             # 🔧 Ensure logs folder exists
 
 echo "[start.sh] Installing frontend dependencies..." | tee -a logs/init.log
 (cd frontend && npm install)
@@ -13,6 +14,6 @@ export VITE_API_BASE="http://localhost:5000"
 sleep 8
 
 echo "[start.sh] Starting backend..." | tee -a logs/init.log
-(cd backend && nohup python3 app.py >> ../logs/backend.log 2>&1 &)
+(cd backend && nohup python3 app.py >> logs/backend.log 2>&1 &)
 
 echo "[start.sh] Done." | tee -a logs/init.log

@@ -56,7 +56,13 @@ npm install
 npm run dev
 ```
 
-4. Make ports 3000 (frontend) and 5000 (backend) public.
+4. Make ports 5173 (frontend) and 5000 (backend) public.
+
+If you're using GitHub Codespaces, the included `.devcontainer` configuration
+automatically installs dependencies, starts both servers, forwards these ports,
+and opens them in the browser as soon as the servers are running. The
+`start.sh` script should be executable; if it's not, run
+`chmod +x .devcontainer/start.sh`.
 
 ---
 

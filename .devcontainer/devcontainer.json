@@ -1,0 +1,16 @@
+{
+  "name": "ICTL Generator",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  "postCreateCommand": "pip install -r backend/requirements.txt && npm --prefix frontend install",
+  "postStartCommand": "./.devcontainer/start.sh",
+  "forwardPorts": [5173, 5000],
+  "portsAttributes": {
+    "5173": {"label": "Frontend", "onAutoForward": "openBrowser", "visibility": "public"},
+    "5000": {"label": "Backend", "visibility": "public"}
+  }
+}

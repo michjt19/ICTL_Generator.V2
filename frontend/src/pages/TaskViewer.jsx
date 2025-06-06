@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_BASE = "https://solid-capybara-6p74q67w5wj2g6x-5000.app.github.dev";
+// Use environment variable so the frontend works in any environment
+const API_BASE = import.meta.env.VITE_API_BASE || "";
 
 export default function TaskViewer() {
   const [tasks, setTasks] = useState([]);

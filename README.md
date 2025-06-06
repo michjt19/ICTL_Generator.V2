@@ -61,8 +61,9 @@ npm run dev
 If you're using GitHub Codespaces, the included `.devcontainer` configuration
 automatically installs dependencies, starts both servers, forwards these ports,
 and opens them in the browser as soon as the servers are running. The
-`start.sh` script should be executable; if it's not, run
-`chmod +x .devcontainer/start.sh`.
+`start.sh` script exports `VITE_API_BASE=http://localhost:5000` before starting
+the frontend so requests hit your local backend. If `start.sh` isn't executable,
+run `chmod +x .devcontainer/start.sh`.
 
 ---
 
